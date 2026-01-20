@@ -1,666 +1,223 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8">
-  <title>Edge Factory – beslutningsmotorer du kan stole på</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Edge Factory – modulære beslutnings- og kontrollsystemer som gjør komplekse, AI-assisterte prosesser sporbare, forklarbare og kommersielt utnyttbare.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edge Factory | Ole Petter Valderhaug</title>
+  <meta name="description" content="Kalibrering av behov: kontroll, sporbarhet og forklarbarhet når AI tas i bruk i drift." />
   <style>
     :root {
-      --bg: #0b1020;
-      --bg-alt: #111729;
-      --card: #151b2e;
-      --accent: #4fd1c5;
-      --accent-soft: rgba(79, 209, 197, 0.12);
-      --text: #f5f7ff;
-      --muted: #a3acc7;
-      --border: #232a3f;
-      --danger: #f56565;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --radius-pill: 999px;
-      --max-width: 980px;
+      --primary-color: #0f172a;
+      --secondary-color: #334155;
+      --accent-color: #2563eb;
+      --bg-color: #f8fafc;
+      --content-bg: #ffffff;
+      --text-main: #1e293b;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1b2540 0, #050814 55%, #02030a 100%);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .page {
-      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      color: var(--text-main);
+      background-color: var(--bg-color);
+      padding: 2rem 1rem;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 16px 40px;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
     }
 
-    .shell {
+    .container {
+      max-width: 680px;
       width: 100%;
-      max-width: var(--max-width);
+      background: var(--content-bg);
+      padding: 3rem 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
     }
 
     header {
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 32px;
-      gap: 16px;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: conic-gradient(from 210deg, #4fd1c5, #63b3ed, #9f7aea, #4fd1c5);
-      position: relative;
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8), 0 12px 30px rgba(0, 0, 0, 0.6);
-    }
-
-    .brand-mark::before {
-      content: "";
-      position: absolute;
-      inset: 5px;
-      border-radius: 8px;
-      background: radial-gradient(circle at 30% 20%, #1a202f, #050814);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-text span:first-child {
-      font-size: 14px;
-      letter-spacing: 0.16em;
+      font-size: 0.9rem;
       text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .brand-text span:last-child {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .header-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: flex-end;
-      font-size: 12px;
-      color: var(--muted);
-      align-items: center;
-    }
-
-    .lang-switcher {
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .lang-switcher:hover {
-      background: rgba(79, 209, 197, 0.1);
-      border-color: rgba(79, 209, 197, 0.5);
-    }
-
-    .pill {
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.7);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(79, 209, 197, 0.25);
-    }
-
-    main {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 880px) {
-      main {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .card {
-      background: radial-gradient(circle at top left, #1f2937 0, #050814 55%);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      padding: 22px 22px 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(79, 209, 197, 0.12), transparent 55%);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .card-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 14px;
-    }
-
-    .hero-kicker span {
-      font-weight: 500;
-      color: var(--accent);
+      letter-spacing: 0.05em;
+      color: var(--accent-color);
+      font-weight: 700;
+      display: block;
     }
 
     h1 {
-      margin: 0 0 10px;
-      font-size: clamp(26px, 3vw, 32px);
-      line-height: 1.15;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      line-height: 1.2;
     }
 
-    .hero-sub {
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 520px;
-    }
-
-    .hero-sub strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .hero-cta-row {
+    .language-switcher {
+      font-size: 0.9rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
       align-items: center;
-      margin-bottom: 16px;
+      gap: 0.5rem;
+      white-space: nowrap;
     }
 
-    .btn-primary {
-      border: none;
-      border-radius: var(--radius-pill);
-      padding: 9px 18px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      background: linear-gradient(135deg, #4fd1c5, #63b3ed);
-      color: #020617;
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.7);
+    .language-switcher span {
+      color: #94a3b8;
+    }
+
+    .language-switcher a {
+      color: var(--accent-color);
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      border-bottom: 1px solid transparent;
+      font-weight: 500;
     }
 
-    .btn-primary span.icon {
-      font-size: 16px;
+    .language-switcher a:hover,
+    .language-switcher a:focus-visible {
+      border-bottom-color: var(--accent-color);
+      outline: none;
     }
 
-    .hero-note {
-      font-size: 12px;
-      color: var(--muted);
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 14px;
-      font-size: 11px;
-      color: var(--muted);
+    p { margin-bottom: 1.2rem; font-size: 1.05rem; }
+
+    ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.2rem;
     }
 
-    .hero-chip {
-      padding: 7px 9px;
-      border-radius: 10px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(30, 64, 175, 0.7);
+    li { margin-bottom: 0.5rem; color: var(--secondary-color); }
+    strong { color: var(--primary-color); font-weight: 600; }
+
+    .context-box {
+      background-color: #eff6ff;
+      border-left: 4px solid var(--accent-color);
+      padding: 1.5rem;
+      margin: 2.5rem 0;
+      border-radius: 4px;
     }
 
-    .hero-chip strong {
-      display: block;
-      font-size: 11px;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
+    .context-box h2 { margin-top: 0; font-size: 1.2rem; }
 
-    .side-card {
-      background: radial-gradient(circle at top, #111827 0, #020617 60%);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      padding: 18px 18px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .section-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .cv-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .cv-name {
-      font-size: 16px;
+    .action-link {
+      display: inline-block;
       font-weight: 600;
-    }
-
-    .cv-role {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .cv-meta {
-      font-size: 11px;
-      color: var(--muted);
-      text-align: right;
-    }
-
-    .cv-meta span {
-      display: block;
-    }
-
-    .cv-list {
-      list-style: none;
-      padding: 0;
-      margin: 6px 0 0;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .cv-list li {
-      margin-bottom: 4px;
-    }
-
-    .cv-list li::before {
-      content: "•";
-      color: var(--accent);
-      margin-right: 6px;
-    }
-
-    .link-inline {
-      color: var(--accent);
+      color: var(--accent-color);
       text-decoration: none;
-      font-size: 13px;
+      border-bottom: 1px solid transparent;
     }
 
-    .link-inline:hover {
-      text-decoration: underline;
+    .action-link:hover,
+    .action-link:focus-visible {
+      border-bottom-color: var(--accent-color);
+      outline: none;
     }
 
-    .stack {
+    .signature {
+      margin-top: 3rem;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin-top: 18px;
+      gap: 0.5rem;
     }
 
-    .stack-card {
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.9);
-      padding: 12px 12px 11px;
+    .signature-text {
+      font-size: 0.95rem;
+      color: var(--secondary-color);
     }
 
-    .stack-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      margin-bottom: 4px;
+    .role {
+      display: block;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 0.2rem;
     }
 
-    .stack-title {
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
-
-    .stack-body {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .stack-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
-
-    .tag {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--muted);
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    .qa-card {
-      margin-top: 18px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: radial-gradient(circle at top left, rgba(79, 209, 197, 0.12), #020617 55%);
-      padding: 12px 12px 11px;
-      font-size: 13px;
-    }
-
-    .qa-title {
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 6px;
-    }
-
-    .qa-list {
-      padding-left: 16px;
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .qa-list li {
-      margin-bottom: 4px;
-    }
-
-    .faq {
-      margin-top: 18px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.9);
-      padding: 12px 12px 10px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .faq-item + .faq-item {
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px solid rgba(30, 64, 175, 0.5);
-    }
-
-    .faq-q {
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-
-    footer {
-      margin-top: 26px;
-      font-size: 11px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
+    @media (max-width: 600px) {
+      .container { padding: 2rem 1.5rem; }
+      header { flex-direction: column; align-items: flex-start; }
+      h1 { font-size: 1.75rem; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="shell">
-      <header>
-        <div class="brand">
-          <div class="brand-mark"></div>
-          <div class="brand-text">
-            <span>Edge Factory</span>
-            <span>Modulære beslutningsmotorer</span>
-          </div>
-        </div>
-        <div class="header-meta">
-          <div class="pill">
-            <span class="pill-dot"></span>
-            <span>Bygget som fabrikk – ikke som enkeltprodukt</span>
-          </div>
-          <div class="pill">
-            Startet januar 2024
-          </div>
-          <a class="lang-switcher" href="/en/">English</a>
-        </div>
-      </header>
+  <div class="container">
+    <header>
+      <div class="brand-block">
+        <span class="brand">Edge Factory</span>
+        <h1>Kontroll på AI-assisterte beslutninger</h1>
+      </div>
+      <div class="language-switcher">
+        <span>Språk:</span>
+        <a href="/en/">English</a>
+      </div>
+    </header>
 
-      <main>
-        <!-- Left: Hero + services + calibration -->
-        <section class="card">
-          <div class="card-inner">
-            <div class="hero-kicker">
-              <span>Edge Factory</span>
-              Modulære systemer for beslutning, kontroll og evidens
-            </div>
-            <h1>Beslutningsmotorer du kan stole på</h1>
-            <p class="hero-sub">
-              Jeg bygger modulære systemer som gjør komplekse, AI‑assisterte prosesser
-              <strong>sporbare, forklarbare og kommersielt utnyttbare</strong> – uten magi og uten svarte bokser.
-            </p>
+    <section>
+      <p><strong>Jeg heter Ole Petter Valderhaug,</strong> og jeg jobber i skjæringspunktet mellom systemarkitektur, AI og operasjonell kontroll.</p>
+      <p>Jeg bygger systemer som gjør komplekse beslutninger sporbare, forklarbare og gjenopprettbare — også når AI inngår i prosessen.</p>
+      <p>Edge Factory er mitt initiativ for å løse det største problemet jeg ser i markedet akkurat nå: Gapet mellom AI i teori og AI i drift.</p>
+    </section>
 
-            <div class="hero-cta-row">
-              <a class="btn-primary" href="mailto:ole@edgefactory.no?subject=Edge%20Factory%20–%20kalibrering">
-                <span class="icon">↗</span>
-                Foreslå en kort avklaring
-              </a>
-              <div class="hero-note">
-                Kort samtale eller skriftlig avklaring – du velger.
-              </div>
-            </div>
+    <section>
+      <h2>Hva jeg utforsker</h2>
+      <p>Mange virksomheter kvier seg for å sette AI i produksjon fordi de mangler kontroll. Jeg gjør dette fordi jeg ser hvor fort kritisk logikk forsvinner når AI tas i bruk uten riktig rammeverk.</p>
+      <p>Min hypotese er at problemet ikke er modellene – men hvordan vi styrer og rammer dem inn. Jeg jobber med arkitektur som kombinerer:</p>
+      <ul>
+        <li><strong>Deterministisk logikk:</strong> Regler som gir forutsigbarhet, repeterbarhet og kontroll.</li>
+        <li><strong>AI som verktøy:</strong> Kun for tolkning, aldri som ukritisk sannhetskilde.</li>
+        <li><strong>Full sporbarhet:</strong> Et etterprøvbart spor fra input → beslutning → output.</li>
+      </ul>
+    </section>
 
-            <div class="hero-grid">
-              <div class="hero-chip">
-                <strong>Deterministisk først</strong>
-                Regler, pipelines og evidens før AI.
-              </div>
-              <div class="hero-chip">
-                <strong>AI der det lønner seg</strong>
-                Brukes som verktøy, ikke sannhetskilde.
-              </div>
-              <div class="hero-chip">
-                <strong>Menneske i loopen</strong>
-                Kvalitetssikring der konsekvensene krever det.
-              </div>
-            </div>
+    <div class="context-box">
+      <h2>Hvis du har mottatt e-post fra meg</h2>
+      <p>Du er her sannsynligvis fordi jeg tok kontakt direkte.</p>
+      <p>Jeg er for tiden i en avklaringsfase. Jeg selger ikke et ferdig produkt, men søker dialog med ledere og fagfolk for å teste om hypotesene mine treffer reelle behov.</p>
+      <p>Jeg ber ikke om et prosjekt – bare en kort faglig avklaring for å forstå hvor skoen trykker hos dere.</p>
+      <p style="margin-bottom: 0;">Er det match, kan jeg foreslå en liten pilot eller en kort, skriftlig vurdering.</p>
+    </div>
 
-            <div class="stack">
-              <div class="stack-card">
-                <div class="stack-label">Hva er Edge Factory – i praksis</div>
-                <div class="stack-title">En fabrikk, ikke ett produkt</div>
-                <div class="stack-body">
-                  Edge Factory er en måte å bygge beslutnings‑ og kontrollsystemer på:
-                  jeg kombinerer deterministisk programvare, målrettet bruk av AI og eksplisitt
-                  evidensflyt for å gjøre komplekse prosesser etterprøvbare, gjenbrukbare og salgbare.
-                </div>
-                <div class="stack-tags">
-                  <span class="tag">Beslutningsmotorer</span>
-                  <span class="tag">Kontroll &amp; governance</span>
-                  <span class="tag">Audit‑klare leveranser</span>
-                </div>
-              </div>
+    <section>
+      <p style="margin-bottom: 0.8rem;">Om dette treffer: Svar gjerne med 1–2 setninger om hvor dere opplever størst friksjon mellom AI-initiativer og trygg drift.</p>
+      <p style="margin-bottom: 0.6rem;">
+        <a href="mailto:connect@edgefactory.no" class="action-link">connect@edgefactory.no</a>
+      </p>
+      <p style="margin-bottom: 0;">
+        <a class="action-link" href="tel:+4797562612">+47 975 62 612</a>
+      </p>
+    </section>
 
-              <div class="stack-card">
-                <div class="stack-label">Hva jeg utforsker nå</div>
-                <div class="stack-title">Typiske bruksområder</div>
-                <div class="stack-body">
-                  Jeg er spesielt interessert i miljøer der:
-                  <ul class="qa-list">
-                    <li>beslutninger må kunne forklares i etterkant</li>
-                    <li>AI vurderes, men tillit og kontroll er en barriere</li>
-                    <li>intern logikk kunne vært et produkt (API, rapporter, white‑label)</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="qa-card">
-                <div class="qa-title">Hvis du har fått en e‑post fra meg</div>
-                <ul class="qa-list">
-                  <li>Jeg ber ikke om et prosjekt – jeg ber om kalibrering.</li>
-                  <li>Jeg ønsker å forstå hvor beslutninger og prosesser hos dere er mest sårbare for “vi vet ikke helt hvorfor det ble sånn”.</li>
-                  <li>Svarene brukes til å avgjøre om Edge Factory faktisk kan gi verdi i deres kontekst.</li>
-                </ul>
-              </div>
-
-              <div class="faq">
-                <div class="faq-item">
-                  <div class="faq-q">Er Edge Factory et ferdig produkt?</div>
-                  <div>Nei. Det er en moden arkitektur og en konkret måte å jobbe på, som tilpasses hvert oppdrag.</div>
-                </div>
-                <div class="faq-item">
-                  <div class="faq-q">Bruker du “magisk AI” som løser alt?</div>
-                  <div>Nei. AI brukes kun der det kan kontrolleres, forklares og gi målbar gevinst.</div>
-                </div>
-                <div class="faq-item">
-                  <div class="faq-q">Hva er første steg hvis vi vil utforske dette?</div>
-                  <div>En kort, konkret avklaringssamtale eller en skriftlig gjennomgang av deres situasjon. Ingen binding.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Right: CV / trust column -->
-        <aside class="side-card">
-          <div>
-            <div class="section-title">Hvem du faktisk samarbeider med</div>
-            <div class="cv-header">
-              <div>
-                <div class="cv-name">Ole Petter Valderhaug</div>
-                <div class="cv-role">Grunnlegger av Edge Factory</div>
-              </div>
-              <div class="cv-meta">
-                <span>Prosjekt startet</span>
-                <span>januar 2024</span>
-              </div>
-            </div>
-            <ul class="cv-list">
-              <li>Lang erfaring i skjæringspunktet mellom IT‑drift, systemdesign og forretningslogikk.</li>
-              <li>Bygger sporbare, audit‑klare løsninger der ingen beslutning “forsvinner”.</li>
-              <li>Oversetter kompleksitet mellom fag, IT og ledelse uten å miste nyanser.</li>
-            </ul>
-            <!-- Oppdater lenke når du har CV/LinkedIn klar -->
-            <!-- <a class="link-inline" href="#" target="_blank" rel="noreferrer">Se full CV</a> -->
-          </div>
-
-          <div>
-            <div class="section-title">Tjenestespor jeg utforsker</div>
-
-            <div class="stack-card">
-              <div class="stack-label">Decision &amp; Control Engines</div>
-              <div class="stack-title">Beslutnings‑ og kontrollmotorer</div>
-              <div class="stack-body">
-                For virksomheter som trenger å dokumentere <em>hvorfor</em> beslutninger tas – ikke bare <em>hva</em> som ble gjort.
-                Beslutningskort, policy‑motorer og guardrails rundt AI‑bruk.
-              </div>
-            </div>
-
-            <div class="stack-card">
-              <div class="stack-label">Evidence &amp; Audit Engines</div>
-              <div class="stack-title">Evidens og etterprøvbarhet</div>
-              <div class="stack-body">
-                For team som må kunne rekonstruere hendelser, forklare avvik og levere audit‑klare rapporter.
-                Append‑only logikk, evidenslenker og replay av hendelser.
-              </div>
-            </div>
-
-            <div class="stack-card">
-              <div class="stack-label">Simulation &amp; What‑if</div>
-              <div class="stack-title">Simulering før beslutning</div>
-              <div class="stack-body">
-                For ledere som vil teste konsekvenser av beslutninger før de rulles ut.
-                What‑if‑simuleringer og stresstesting av policyer og prosesser.
-              </div>
-            </div>
-
-            <div class="stack-card">
-              <div class="stack-label">Commercialization</div>
-              <div class="stack-title">Fra intern logikk til produkt</div>
-              <div class="stack-body">
-                For selskaper som sitter på intern logikk og vil gjøre den om til et produkt:
-                API‑er, rapporter eller white‑label‑leveranser.
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div class="section-title">Kontakt</div>
-            <div class="stack-body">
-              <div style="font-size:13px;color:var(--muted);margin-bottom:6px;">
-                Du kan svare direkte på e‑posten du har fått, eller kontakte meg her:
-              </div>
-              <div style="font-size:13px;">
-                E‑post:
-                <a class="link-inline" href="mailto:ole@edgefactory.no">ole@edgefactory.no</a>
-              </div>
-              <div style="font-size:13px;margin-top:6px;">
-                Telefon:
-                <a class="link-inline" href="tel:+4797562612">+47 975 62 612</a>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </main>
-
-      <footer>
-        Edge Factory &mdash; modulær fabrikk for beslutnings‑, kontroll‑ og verdiskapende systemer.
-      </footer>
+    <div class="signature">
+      <div class="signature-text">
+        <strong>Ole Petter Valderhaug</strong>
+        <span class="role">Systems Engineering & Architecture</span>
+      </div>
     </div>
   </div>
 </body>

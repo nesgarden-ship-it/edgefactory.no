@@ -1,664 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Edge Factory – Decision engines you can trust</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Edge Factory – Modular decision and control systems that make complex, AI-assisted processes traceable, explainable, and commercially viable.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edge Factory | Ole Petter Valderhaug</title>
+  <meta name="description" content="Calibrating needs: control, traceability, and explainability when adopting AI in operations." />
   <style>
     :root {
-      --bg: #0b1020;
-      --bg-alt: #111729;
-      --card: #151b2e;
-      --accent: #4fd1c5;
-      --accent-soft: rgba(79, 209, 197, 0.12);
-      --text: #f5f7ff;
-      --muted: #a3acc7;
-      --border: #232a3f;
-      --danger: #f56565;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --radius-pill: 999px;
-      --max-width: 980px;
+      --primary-color: #0f172a;
+      --secondary-color: #334155;
+      --accent-color: #2563eb;
+      --bg-color: #f8fafc;
+      --content-bg: #ffffff;
+      --text-main: #1e293b;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1b2540 0, #050814 55%, #02030a 100%);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .page {
-      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      color: var(--text-main);
+      background-color: var(--bg-color);
+      padding: 2rem 1rem;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 16px 40px;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
     }
 
-    .shell {
+    .container {
+      max-width: 680px;
       width: 100%;
-      max-width: var(--max-width);
+      background: var(--content-bg);
+      padding: 3rem 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
     }
 
     header {
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 32px;
-      gap: 16px;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: conic-gradient(from 210deg, #4fd1c5, #63b3ed, #9f7aea, #4fd1c5);
-      position: relative;
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8), 0 12px 30px rgba(0, 0, 0, 0.6);
-    }
-
-    .brand-mark::before {
-      content: "";
-      position: absolute;
-      inset: 5px;
-      border-radius: 8px;
-      background: radial-gradient(circle at 30% 20%, #1a202f, #050814);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-text span:first-child {
-      font-size: 14px;
-      letter-spacing: 0.16em;
+      font-size: 0.9rem;
       text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .brand-text span:last-child {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .header-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: flex-end;
-      font-size: 12px;
-      color: var(--muted);
-      align-items: center;
-    }
-
-    .lang-switcher {
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .lang-switcher:hover {
-      background: rgba(79, 209, 197, 0.1);
-      border-color: rgba(79, 209, 197, 0.5);
-    }
-
-    .pill {
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.7);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(79, 209, 197, 0.25);
-    }
-
-    main {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 880px) {
-      main {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .card {
-      background: radial-gradient(circle at top left, #1f2937 0, #050814 55%);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      padding: 22px 22px 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(79, 209, 197, 0.12), transparent 55%);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .card-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 14px;
-    }
-
-    .hero-kicker span {
-      font-weight: 500;
-      color: var(--accent);
+      letter-spacing: 0.05em;
+      color: var(--accent-color);
+      font-weight: 700;
+      display: block;
     }
 
     h1 {
-      margin: 0 0 10px;
-      font-size: clamp(26px, 3vw, 32px);
-      line-height: 1.15;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      line-height: 1.2;
     }
 
-    .hero-sub {
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 520px;
-    }
-
-    .hero-sub strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .hero-cta-row {
+    .language-switcher {
+      font-size: 0.9rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
       align-items: center;
-      margin-bottom: 16px;
+      gap: 0.5rem;
+      white-space: nowrap;
     }
 
-    .btn-primary {
-      border: none;
-      border-radius: var(--radius-pill);
-      padding: 9px 18px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      background: linear-gradient(135deg, #4fd1c5, #63b3ed);
-      color: #020617;
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.7);
+    .language-switcher span {
+      color: #94a3b8;
+    }
+
+    .language-switcher a {
+      color: var(--accent-color);
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      border-bottom: 1px solid transparent;
+      font-weight: 500;
     }
 
-    .btn-primary span.icon {
-      font-size: 16px;
+    .language-switcher a:hover,
+    .language-switcher a:focus-visible {
+      border-bottom-color: var(--accent-color);
+      outline: none;
     }
 
-    .hero-note {
-      font-size: 12px;
-      color: var(--muted);
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 14px;
-      font-size: 11px;
-      color: var(--muted);
+    p { margin-bottom: 1.2rem; font-size: 1.05rem; }
+
+    ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.2rem;
     }
 
-    .hero-chip {
-      padding: 7px 9px;
-      border-radius: 10px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(30, 64, 175, 0.7);
+    li { margin-bottom: 0.5rem; color: var(--secondary-color); }
+    strong { color: var(--primary-color); font-weight: 600; }
+
+    .context-box {
+      background-color: #eff6ff;
+      border-left: 4px solid var(--accent-color);
+      padding: 1.5rem;
+      margin: 2.5rem 0;
+      border-radius: 4px;
     }
 
-    .hero-chip strong {
-      display: block;
-      font-size: 11px;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
+    .context-box h2 { margin-top: 0; font-size: 1.2rem; }
 
-    .side-card {
-      background: radial-gradient(circle at top, #111827 0, #020617 60%);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      padding: 18px 18px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .section-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .cv-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .cv-name {
-      font-size: 16px;
+    .action-link {
+      display: inline-block;
       font-weight: 600;
-    }
-
-    .cv-role {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .cv-meta {
-      font-size: 11px;
-      color: var(--muted);
-      text-align: right;
-    }
-
-    .cv-meta span {
-      display: block;
-    }
-
-    .cv-list {
-      list-style: none;
-      padding: 0;
-      margin: 6px 0 0;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .cv-list li {
-      margin-bottom: 4px;
-    }
-
-    .cv-list li::before {
-      content: "•";
-      color: var(--accent);
-      margin-right: 6px;
-    }
-
-    .link-inline {
-      color: var(--accent);
+      color: var(--accent-color);
       text-decoration: none;
-      font-size: 13px;
+      border-bottom: 1px solid transparent;
     }
 
-    .link-inline:hover {
-      text-decoration: underline;
+    .action-link:hover,
+    .action-link:focus-visible {
+      border-bottom-color: var(--accent-color);
+      outline: none;
     }
 
-    .stack {
+    .signature {
+      margin-top: 3rem;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin-top: 18px;
+      gap: 0.5rem;
     }
 
-    .stack-card {
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.9);
-      padding: 12px 12px 11px;
+    .signature-text {
+      font-size: 0.95rem;
+      color: var(--secondary-color);
     }
 
-    .stack-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      margin-bottom: 4px;
+    .role {
+      display: block;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 0.2rem;
     }
 
-    .stack-title {
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
-
-    .stack-body {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .stack-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
-
-    .tag {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--muted);
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    .qa-card {
-      margin-top: 18px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: radial-gradient(circle at top left, rgba(79, 209, 197, 0.12), #020617 55%);
-      padding: 12px 12px 11px;
-      font-size: 13px;
-    }
-
-    .qa-title {
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 6px;
-    }
-
-    .qa-list {
-      padding-left: 16px;
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .qa-list li {
-      margin-bottom: 4px;
-    }
-
-    .faq {
-      margin-top: 18px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.9);
-      padding: 12px 12px 10px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .faq-item + .faq-item {
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px solid rgba(30, 64, 175, 0.5);
-    }
-
-    .faq-q {
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-
-    footer {
-      margin-top: 26px;
-      font-size: 11px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
+    @media (max-width: 600px) {
+      .container { padding: 2rem 1.5rem; }
+      header { flex-direction: column; align-items: flex-start; }
+      h1 { font-size: 1.75rem; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="shell">
-      <header>
-        <div class="brand">
-          <div class="brand-mark"></div>
-          <div class="brand-text">
-            <span>Edge Factory</span>
-            <span>Modular Decision Engines</span>
-          </div>
-        </div>
-        <div class="header-meta">
-          <div class="pill">
-            <span class="pill-dot"></span>
-            <span>Built as a factory, not as a product</span>
-          </div>
-          <div class="pill">
-            Started January 2024
-          </div>
-          <a class="lang-switcher" href="/">Norsk</a>
-        </div>
-      </header>
+  <div class="container">
+    <header>
+      <div class="brand-block">
+        <span class="brand">Edge Factory</span>
+        <h1>Control for AI-assisted decisions</h1>
+      </div>
+      <div class="language-switcher">
+        <span>Language:</span>
+        <a href="/">Norsk</a>
+      </div>
+    </header>
 
-      <main>
-        <!-- Left: Hero + services + calibration -->
-        <section class="card">
-          <div class="card-inner">
-            <div class="hero-kicker">
-              <span>Edge Factory</span>
-              Modular systems for decision, control, and evidence
-            </div>
-            <h1>Decision engines you can trust</h1>
-            <p class="hero-sub">
-              I build modular systems that make complex, AI-assisted processes
-              <strong>traceable, explainable, and commercially viable</strong> – without magic, without black boxes.
-            </p>
+    <section>
+      <p><strong>My name is Ole Petter Valderhaug,</strong> and I work at the intersection of systems architecture, AI, and operational control.</p>
+      <p>I build systems that make complex decisions traceable, explainable, and recoverable — even when AI is part of the process.</p>
+      <p>Edge Factory is my initiative to address the biggest problem I see in the market right now: The gap between AI in theory and AI in production.</p>
+    </section>
 
-            <div class="hero-cta-row">
-              <a class="btn-primary" href="mailto:ole@edgefactory.no?subject=Edge%20Factory%20–%20Calibration%20Session">
-                <span class="icon">↗</span>
-                Schedule a brief alignment
-              </a>
-              <div class="hero-note">
-                Call or written briefing – you choose.
-              </div>
-            </div>
+    <section>
+      <h2>What I'm exploring</h2>
+      <p>Many organizations hesitate to deploy AI in production because they lack control. I do this because I see how quickly critical logic disappears when AI is adopted without the right framework.</p>
+      <p>My hypothesis is that the problem isn't the models — it's how we govern and constrain them. I work with architecture that combines:</p>
+      <ul>
+        <li><strong>Deterministic logic:</strong> Rules that provide predictability, repeatability, and control.</li>
+        <li><strong>AI as a tool:</strong> Only for interpretation, never as an uncritical source of truth.</li>
+        <li><strong>Full traceability:</strong> An auditable trail from input → decision → output.</li>
+      </ul>
+    </section>
 
-            <div class="hero-grid">
-              <div class="hero-chip">
-                <strong>Deterministic First</strong>
-                Rules, pipelines, and evidence before AI.
-              </div>
-              <div class="hero-chip">
-                <strong>AI Where It Works</strong>
-                Used as a tool, not a source of truth.
-              </div>
-              <div class="hero-chip">
-                <strong>Humans in the Loop</strong>
-                Quality assurance where consequences demand it.
-              </div>
-            </div>
+    <div class="context-box">
+      <h2>If you received an email from me</h2>
+      <p>You're probably here because I reached out directly.</p>
+      <p>I'm currently in a calibration phase. I'm not selling a finished product, but seeking dialogue with leaders and professionals to test whether my hypotheses address real needs.</p>
+      <p>I'm not asking for a project — just a brief professional alignment to understand where the friction is for you.</p>
+      <p style="margin-bottom: 0;">If there's a fit, I can propose a small pilot or a brief written assessment.</p>
+    </div>
 
-            <div class="stack">
-              <div class="stack-card">
-                <div class="stack-label">What Edge Factory Is – In Practice</div>
-                <div class="stack-title">A factory, not a product</div>
-                <div class="stack-body">
-                  Edge Factory is an approach to building decision and control systems:
-                  I combine deterministic software, targeted AI use, and explicit evidence
-                  flow to make complex processes auditable, reusable, and sellable.
-                </div>
-                <div class="stack-tags">
-                  <span class="tag">Decision Engines</span>
-                  <span class="tag">Control &amp; Governance</span>
-                  <span class="tag">Audit-Ready Delivery</span>
-                </div>
-              </div>
+    <section>
+      <p style="margin-bottom: 0.8rem;">If this resonates: Feel free to respond with 1–2 sentences about where you experience the greatest friction between AI initiatives and safe operations.</p>
+      <p style="margin-bottom: 0.6rem;">
+        <a href="mailto:connect@edgefactory.no" class="action-link">connect@edgefactory.no</a>
+      </p>
+      <p style="margin-bottom: 0;">
+        <a class="action-link" href="tel:+4797562612">+47 975 62 612</a>
+      </p>
+    </section>
 
-              <div class="stack-card">
-                <div class="stack-label">What I'm Exploring Now</div>
-                <div class="stack-title">Typical use cases</div>
-                <div class="stack-body">
-                  I'm particularly interested in environments where:
-                  <ul class="qa-list">
-                    <li>decisions must be explainable after the fact</li>
-                    <li>AI is under consideration, but trust and control are barriers</li>
-                    <li>internal logic could become a product (API, reports, white-label)</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="qa-card">
-                <div class="qa-title">If you received an email from me</div>
-                <ul class="qa-list">
-                  <li>I'm not asking for a project – I'm asking for a calibration session.</li>
-                  <li>I want to understand where your decisions and processes are most vulnerable to "we're not entirely sure why it happened that way."</li>
-                  <li>Your answers help me decide if Edge Factory can actually create value in your context.</li>
-                </ul>
-              </div>
-
-              <div class="faq">
-                <div class="faq-item">
-                  <div class="faq-q">Is Edge Factory a finished product?</div>
-                  <div>No. It's a proven architecture and a concrete way of working, customized for each engagement.</div>
-                </div>
-                <div class="faq-item">
-                  <div class="faq-q">Do you use "magical AI" to solve everything?</div>
-                  <div>No. AI is used only where it can be controlled, explained, and deliver measurable value.</div>
-                </div>
-                <div class="faq-item">
-                  <div class="faq-q">What's the first step if we want to explore this?</div>
-                  <div>A brief, concrete calibration call or a written overview of your situation. No commitment.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Right: CV / trust column -->
-        <aside class="side-card">
-          <div>
-            <div class="section-title">Who you actually work with</div>
-            <div class="cv-header">
-              <div>
-                <div class="cv-name">Ole Petter Valderhaug</div>
-                <div class="cv-role">Founder of Edge Factory</div>
-              </div>
-              <div class="cv-meta">
-                <span>Project started</span>
-                <span>January 2024</span>
-              </div>
-            </div>
-            <ul class="cv-list">
-              <li>Deep experience at the intersection of IT operations, systems design, and business logic.</li>
-              <li>Builds traceable, audit-ready solutions where no decision "disappears."</li>
-              <li>Translates complexity between disciplines, IT, and leadership without losing nuance.</li>
-            </ul>
-          </div>
-
-          <div>
-            <div class="section-title">Service Lines I'm Exploring</div>
-
-            <div class="stack-card">
-              <div class="stack-label">Decision &amp; Control Engines</div>
-              <div class="stack-title">Decision and control motors</div>
-              <div class="stack-body">
-                For organizations that need to document <em>why</em> decisions are made – not just <em>what</em> was done.
-                Decision cards, policy engines, and AI guardrails.
-              </div>
-            </div>
-
-            <div class="stack-card">
-              <div class="stack-label">Evidence &amp; Audit Engines</div>
-              <div class="stack-title">Evidence and auditability</div>
-              <div class="stack-body">
-                For teams that must reconstruct events, explain deviations, and deliver audit-ready reports.
-                Append-only logic, evidence chains, and event replay.
-              </div>
-            </div>
-
-            <div class="stack-card">
-              <div class="stack-label">Simulation &amp; What-If</div>
-              <div class="stack-title">Simulation before decision</div>
-              <div class="stack-body">
-                For leaders who want to test the consequences of decisions before rollout.
-                What-if simulations and policy stress testing.
-              </div>
-            </div>
-
-            <div class="stack-card">
-              <div class="stack-label">Commercialization</div>
-              <div class="stack-title">From internal logic to product</div>
-              <div class="stack-body">
-                For companies with internal logic and a desire to turn it into a product:
-                APIs, reports, or white-label delivery.
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div class="section-title">Get in Touch</div>
-            <div class="stack-body">
-              <div style="font-size:13px;color:var(--muted);margin-bottom:6px;">
-                Reply directly to the email you received, or contact me here:
-              </div>
-              <div style="font-size:13px;">
-                Email:
-                <a class="link-inline" href="mailto:ole@edgefactory.no">ole@edgefactory.no</a>
-              </div>
-              <div style="font-size:13px;margin-top:6px;">
-                Phone:
-                <a class="link-inline" href="tel:+4797562612">+47 975 62 612</a>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </main>
-
-      <footer>
-        Edge Factory &mdash; modular factory for decision, control, and value-creating systems.
-      </footer>
+    <div class="signature">
+      <div class="signature-text">
+        <strong>Ole Petter Valderhaug</strong>
+        <span class="role">Systems Engineering & Architecture</span>
+      </div>
     </div>
   </div>
 </body>
