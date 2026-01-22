@@ -80,9 +80,6 @@ Serve the site locally using any static web server:
 # Python 3
 python3 -m http.server 8000
 
-# Python 2
-python -m SimpleHTTPServer 8000
-
 # Node.js (with npx)
 npx http-server -p 8000
 
@@ -151,7 +148,7 @@ Modern browsers with CSS Grid and CSS Custom Properties support:
 
 ### Performance
 
-- Minimal page weight (~7KB per page)
+- Minimal page weight (~6.7KB per page, including inline CSS)
 - Single request, no external resources
 - Instant page loads
 
