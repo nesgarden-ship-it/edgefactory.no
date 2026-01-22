@@ -3,222 +3,983 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edge Factory | Ole Petter Valderhaug</title>
-  <meta name="description" content="Calibrating needs: control, traceability, and explainability when adopting AI in operations." />
+  <title>Edge Factory | Deterministic AI Governance for Compliance & Security</title>
+  <meta name="description" content="Control AI decisions in production. Actionable governance, traceability, and audit-ready evidence – in days, not months." />
+  
+  <!-- OpenGraph / Social -->
+  <meta property="og:title" content="Edge Factory – Governance and Traceability for Production AI" />
+  <meta property="og:description" content="Evidence-based delivery for compliance, security, and IT leadership. Pre-Audit SSOT Snapshot in 3 days. Incident Evidence Pack in 48 hours." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://edgefactory.no/en/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="no_NO" />
+  
+  <!-- Canonical and language alternates -->
+  <link rel="canonical" href="https://edgefactory.no/en/" />
+  <link rel="alternate" hreflang="no" href="https://edgefactory.no/" />
+  <link rel="alternate" hreflang="en" href="https://edgefactory.no/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://edgefactory.no/" />
+  
   <style>
     :root {
       --primary-color: #e2e8f0;
       --secondary-color: #cbd5e1;
       --accent-color: #3b82f6;
-      --bg-color: #111213;
-      --content-bg: #1a1b1c;
-      --text-main: #e2e8f0;
+      --bg-color: #ffffff;
+      --content-bg: #f8fafc;
+      --text-main: #1e293b;
+      --text-secondary: #475569;
+      --border-color: #e2e8f0;
+      --card-bg: #ffffff;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.7;
+      line-height: 1.6;
       color: var(--text-main);
       background-color: var(--bg-color);
-      padding: 2rem 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
     }
 
-    .container {
-      max-width: 680px;
-      width: 100%;
-      background: var(--content-bg);
-      padding: 3rem 2.5rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -1px rgba(0,0,0,0.2);
-      border: 1px solid #2a2b2c;
-    }
-
+    /* Header */
     header {
-      border-bottom: 2px solid #2a2b2c;
-      padding-bottom: 2rem;
-      margin-bottom: 2.5rem;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .brand-block {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
+      align-items: center;
     }
 
     .brand {
-      font-size: 0.9rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--accent-color);
-      font-weight: 700;
-      display: block;
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary-color);
-      line-height: 1.2;
     }
 
     .language-switcher {
-      font-size: 0.9rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      white-space: nowrap;
-    }
-
-    .language-switcher span {
-      color: #94a3b8;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
     }
 
     .language-switcher a {
       color: var(--accent-color);
       text-decoration: none;
-      border-bottom: 1px solid transparent;
       font-weight: 500;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.2s;
     }
 
     .language-switcher a:hover,
     .language-switcher a:focus-visible {
-      border-bottom-color: var(--accent-color);
+      background-color: var(--content-bg);
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Section styling */
+    section {
+      padding: 4rem 0;
+    }
+
+    section:nth-child(even) {
+      background-color: var(--content-bg);
+    }
+
+    .section-heading {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .section-intro {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 5rem 0;
+      text-align: center;
+    }
+
+    .hero-headline {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-subheadline {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background-color: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
       outline: none;
     }
 
-    h2 {
-      font-size: 1.4rem;
-      margin-top: 2.5rem;
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--accent-color);
+      border-color: var(--accent-color);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background-color: var(--accent-color);
+      color: #ffffff;
+      outline: none;
+    }
+
+    /* Grid layouts */
+    .grid {
+      display: grid;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    /* Card */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 3rem;
+      height: 3rem;
+      background: var(--accent-color);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .step-content h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-content p {
+      color: var(--text-secondary);
+    }
+
+    /* Offers */
+    .offer-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .offer-card:hover {
+      border-color: var(--accent-color);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12);
+    }
+
+    .offer-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .offer-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .offer-tagline {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .offer-meta {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .offer-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .offer-meta-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .offer-meta-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .offer-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .offer-section h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .offer-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .offer-list li {
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .offer-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+
+    .offer-list.not-included li::before {
+      content: "×";
+      color: #ef4444;
+    }
+
+    /* Contact Form */
+    .contact-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 3rem;
+    }
+
+    .calendly-section {
+      text-align: center;
+      padding: 2rem;
+      background: var(--content-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .calendly-section p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .form-section h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text-main);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .form-checkbox {
+      margin-top: 0.25rem;
+    }
+
+    .form-checkbox-label {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .form-message {
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .form-message.success {
+      background-color: #d1fae5;
+      color: #065f46;
+      border: 1px solid #6ee7b7;
+    }
+
+    .form-message.error {
+      background-color: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+
+    .form-message.show {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--text-main);
+      color: var(--primary-color);
+      padding: 3rem 0 1.5rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1rem;
+      font-weight: 700;
       margin-bottom: 1rem;
       color: var(--primary-color);
     }
 
-    p { margin-bottom: 1.2rem; font-size: 1.05rem; }
-
-    ul {
-      margin-bottom: 1.5rem;
-      padding-left: 1.2rem;
+    .footer-section p,
+    .footer-section a {
+      color: var(--secondary-color);
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
 
-    li { margin-bottom: 0.5rem; color: var(--secondary-color); }
-    strong { color: var(--primary-color); font-weight: 600; }
-
-    .context-box {
-      background-color: #1e2023;
-      border-left: 4px solid var(--accent-color);
-      padding: 1.5rem;
-      margin: 2.5rem 0;
-      border-radius: 4px;
-    }
-
-    .context-box h2 { margin-top: 0; font-size: 1.2rem; }
-
-    .action-link {
-      display: inline-block;
-      font-weight: 600;
-      color: var(--accent-color);
+    .footer-section a {
       text-decoration: none;
-      border-bottom: 1px solid transparent;
+      display: block;
+      margin-bottom: 0.5rem;
     }
 
-    .action-link:hover,
-    .action-link:focus-visible {
-      border-bottom-color: var(--accent-color);
+    .footer-section a:hover,
+    .footer-section a:focus-visible {
+      color: var(--accent-color);
       outline: none;
     }
 
-    .signature {
-      margin-top: 3rem;
-      border-top: 1px solid #2a2b2c;
+    .footer-bottom {
+      border-top: 1px solid #334155;
       padding-top: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .signature-text {
-      font-size: 0.95rem;
+      text-align: center;
       color: var(--secondary-color);
+      font-size: 0.875rem;
     }
 
-    .role {
-      display: block;
-      font-size: 0.85rem;
-      color: #94a3b8;
-      margin-bottom: 0.2rem;
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-headline {
+        font-size: 2rem;
+      }
+
+      .hero-subheadline {
+        font-size: 1.125rem;
+      }
+
+      .section-heading {
+        font-size: 1.75rem;
+      }
+
+      section {
+        padding: 3rem 0;
+      }
+
+      .step {
+        flex-direction: column;
+      }
+
+      .offer-meta {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
     }
 
-    @media (max-width: 600px) {
-      .container { padding: 2rem 1.5rem; }
-      header { flex-direction: column; align-items: flex-start; }
-      h1 { font-size: 1.75rem; }
+    /* Accessibility */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Skip to content */
+    .skip-to-content {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent-color);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      z-index: 1000;
+    }
+
+    .skip-to-content:focus {
+      top: 0;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="brand-block">
-        <span class="brand">Edge Factory</span>
-        <h1>Control for AI-assisted decisions</h1>
-      </div>
-      <div class="language-switcher">
-        <span>Language:</span>
-        <a href="/">Norsk</a>
-      </div>
-    </header>
-
-    <section>
-      <p><strong>My name is Ole Petter Valderhaug,</strong> and I work at the intersection of systems architecture, AI, and operational control.</p>
-      <p>I build systems that make complex decisions traceable, explainable, and recoverable — even when AI is part of the process.</p>
-      <p>Edge Factory is my initiative to address the biggest problem I see in the market right now: The gap between AI in theory and AI in production.</p>
-    </section>
-
-    <section>
-      <h2>What I'm exploring</h2>
-      <p>Many organizations hesitate to deploy AI in production because they lack control. I do this because I see how quickly critical logic disappears when AI is adopted without the right framework.</p>
-      <p>My hypothesis is that the problem isn't the models — it's how we govern and constrain them. I work with architecture that combines:</p>
-      <ul>
-        <li><strong>Deterministic logic:</strong> Rules that provide predictability, repeatability, and control.</li>
-        <li><strong>AI as a tool:</strong> Only for interpretation, never as an uncritical source of truth.</li>
-        <li><strong>Full traceability:</strong> An auditable trail from input → decision → output.</li>
-      </ul>
-    </section>
-
-    <div class="context-box">
-      <h2>If you received an email from me</h2>
-      <p>You're probably here because I reached out directly.</p>
-      <p>I'm currently in a calibration phase. I'm not selling a finished product, but seeking dialogue with leaders and professionals to test whether my hypotheses address real needs.</p>
-      <p>I'm not asking for a project — just a brief professional alignment to understand where the friction is for you.</p>
-      <p style="margin-bottom: 0;">If there's a fit, I can propose a small pilot or a brief written assessment.</p>
-    </div>
-
-    <section>
-      <p style="margin-bottom: 0.8rem;">If this resonates: Feel free to respond with 1–2 sentences about where you experience the greatest friction between AI initiatives and safe operations.</p>
-      <p style="margin-bottom: 0.6rem;">
-        <a href="mailto:ole@edgefactory.no" class="action-link">ole@edgefactory.no</a>
-      </p>
-      <p style="margin-bottom: 0;">
-        <a class="action-link" href="tel:+4797562612">+47 975 62 612</a>
-      </p>
-    </section>
-
-    <div class="signature">
-      <div class="signature-text">
-        <strong>Ole Petter Valderhaug</strong>
-        <span class="role">Systems Engineering & Architecture</span>
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  
+  <header role="banner">
+    <div class="header-content">
+      <a href="/en/" class="brand" aria-label="Edge Factory homepage">Edge Factory</a>
+      <div class="language-switcher" role="navigation" aria-label="Language selection">
+        <span aria-hidden="true">Language:</span>
+        <a href="/" lang="no" hreflang="no" aria-label="Bytt til Norsk">Norsk</a>
       </div>
     </div>
-  </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-headline">Deterministic AI governance for enterprises that demand control</h1>
+        <p class="hero-subheadline">Get structured evidence, traceability, and audit-ready deliverables when adopting AI in production. No hype. Just determinism, governance, and fast delivery.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Book a 15-minute fit check</a>
+          <a href="#what-you-get" class="btn btn-secondary">See what you get</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- What You Get Section -->
+    <section id="what-you-get">
+      <div class="container">
+        <h2 class="section-heading">What You Get</h2>
+        <p class="section-intro">Concrete deliverables – no consultant speak. You get structured, audit-ready documents delivered in days.</p>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3 class="card-title">Evidence Pack</h3>
+            <p class="card-description">Structured evidence from logs, documents, and systems. Ready for audits or incident response.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">SSOT Snapshot</h3>
+            <p class="card-description">Single Source of Truth snapshot of your configuration, decision chain, and control points.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Decision Trail</h3>
+            <p class="card-description">Complete audit trail from input to output. Predictable, repeatable, explainable.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Documentation That Lasts</h3>
+            <p class="card-description">Not PowerPoint slides. Actual structure you can use in production.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who It's For Section -->
+    <section id="who-its-for">
+      <div class="container">
+        <h2 class="section-heading">Who This Is For</h2>
+        <p class="section-intro">We work with leaders and teams who must balance innovation with control and compliance.</p>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3 class="card-title">Compliance & GRC Leadership</h3>
+            <p class="card-description">You need proof that AI decisions can be explained, traced, and audited.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Security & SOC Teams</h3>
+            <p class="card-description">You must document incidents, investigate anomalies, and demonstrate control.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">IT & Platform Leadership</h3>
+            <p class="card-description">You want AI in production – but with governance, not guesswork.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works">
+      <div class="container">
+        <h2 class="section-heading">How It Works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number" aria-hidden="true">1</div>
+            <div class="step-content">
+              <h3>Intake</h3>
+              <p>You share relevant logs, documents, or system access. We define scope and deliverables.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number" aria-hidden="true">2</div>
+            <div class="step-content">
+              <h3>Evidence Collection</h3>
+              <p>We extract data, structure evidence, and map decision chains.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number" aria-hidden="true">3</div>
+            <div class="step-content">
+              <h3>Structuring</h3>
+              <p>We package everything into a readable, audit-ready format with decision trails.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number" aria-hidden="true">4</div>
+            <div class="step-content">
+              <h3>Delivery</h3>
+              <p>You receive documents, data, and traceability ready for audits, compliance, or production.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number" aria-hidden="true">5</div>
+            <div class="step-content">
+              <h3>Follow-up (Optional)</h3>
+              <p>We can continue with a pilot, integration, or further mapping.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Edge Factory Section -->
+    <section id="why-edge-factory">
+      <div class="container">
+        <h2 class="section-heading">Why Edge Factory</h2>
+        <p class="section-intro">We're not a typical consultancy. We deliver.</p>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3 class="card-title">Deterministic Governance</h3>
+            <p class="card-description">We build systems with predictable logic, not black boxes. Every decision can be traced, explained, and repeated.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Evidence-First</h3>
+            <p class="card-description">No assumptions or slides. We deliver actual evidence, structured data, and audit trails.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Audit-Ready Artifacts</h3>
+            <p class="card-description">Everything we deliver can be used directly in audits, compliance reports, or incident response.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Reversible and Traceable</h3>
+            <p class="card-description">Every decision has a complete trail. If something goes wrong, you can go back and understand what happened.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Fast Delivery</h3>
+            <p class="card-description">Days, not months. We focus on delivering value quickly, so you can make decisions based on facts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offers Section -->
+    <section id="offers">
+      <div class="container">
+        <h2 class="section-heading">Choose an Offer</h2>
+        <p class="section-intro">Two fixed deliverables to get started quickly. No large projects. Concrete results in days.</p>
+        <div class="grid grid-2">
+          <!-- Offer 1: Pre-Audit SSOT Snapshot -->
+          <div class="offer-card">
+            <div class="offer-header">
+              <h3 class="offer-name">Pre-Audit SSOT Snapshot</h3>
+              <p class="offer-tagline">Prepare your configuration before audit</p>
+            </div>
+            <div class="offer-meta">
+              <div class="offer-meta-item">
+                <span class="offer-meta-label">Turnaround</span>
+                <span class="offer-meta-value">3 days</span>
+              </div>
+              <div class="offer-meta-item">
+                <span class="offer-meta-label">Price</span>
+                <span class="offer-meta-value">Fixed fee</span>
+              </div>
+            </div>
+            <div class="offer-section">
+              <h4>Scope</h4>
+              <ul class="offer-list">
+                <li>Snapshot of current configuration and decision chains</li>
+                <li>Mapping of control points and governance gaps</li>
+                <li>Structured documentation ready for audit</li>
+                <li>Recommendations for compliance and traceability</li>
+              </ul>
+            </div>
+            <div class="offer-section">
+              <h4>You provide</h4>
+              <ul class="offer-list">
+                <li>Access to relevant systems or documents</li>
+                <li>Brief initial conversation (30 min)</li>
+                <li>Named internal contact person</li>
+              </ul>
+            </div>
+            <div class="offer-section">
+              <h4>You receive</h4>
+              <ul class="offer-list">
+                <li>SSOT Report (PDF/Markdown)</li>
+                <li>Decision trail diagram</li>
+                <li>Recommended action plan</li>
+              </ul>
+            </div>
+            <div class="offer-section">
+              <h4>Not included</h4>
+              <ul class="offer-list not-included">
+                <li>Integrations or code changes</li>
+                <li>Ongoing support after delivery</li>
+                <li>Comprehensive risk analysis</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Offer 2: Incident Evidence Pack -->
+          <div class="offer-card">
+            <div class="offer-header">
+              <h3 class="offer-name">Incident Evidence Pack</h3>
+              <p class="offer-tagline">Get structured evidence after an incident</p>
+            </div>
+            <div class="offer-meta">
+              <div class="offer-meta-item">
+                <span class="offer-meta-label">Turnaround</span>
+                <span class="offer-meta-value">48 hours</span>
+              </div>
+              <div class="offer-meta-item">
+                <span class="offer-meta-label">Price</span>
+                <span class="offer-meta-value">Fixed fee</span>
+              </div>
+            </div>
+            <div class="offer-section">
+              <h4>Scope</h4>
+              <ul class="offer-list">
+                <li>Rapid structuring of logs and incident data</li>
+                <li>Timeline and decision trail</li>
+                <li>Report ready for incident response or leadership</li>
+                <li>Identification of root cause and control failures</li>
+              </ul>
+            </div>
+            <div class="offer-section">
+              <h4>You provide</h4>
+              <ul class="offer-list">
+                <li>Logs, incident reports, or system access</li>
+                <li>Brief description of the incident</li>
+                <li>Immediate availability for questions</li>
+              </ul>
+            </div>
+            <div class="offer-section">
+              <h4>You receive</h4>
+              <ul class="offer-list">
+                <li>Evidence Pack (PDF/Markdown)</li>
+                <li>Incident timeline</li>
+                <li>Root cause analysis (initial)</li>
+              </ul>
+            </div>
+            <div class="offer-section">
+              <h4>Not included</h4>
+              <ul class="offer-list not-included">
+                <li>Legal advice</li>
+                <li>Ongoing monitoring</li>
+                <li>Complete forensic analysis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="#contact" class="btn btn-primary">Order or ask for pricing</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-heading">Get in Touch</h2>
+        <p class="section-intro">Book a 15-minute fit check or send us a message. We respond within 24 hours.</p>
+        <div class="contact-content">
+          <div class="calendly-section">
+            <p><strong>Book a meeting directly:</strong></p>
+            <a href="https://calendly.com/edgefactory/15min" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Book on Calendly</a>
+          </div>
+          <div class="form-section">
+            <h3>Or send us a message:</h3>
+            <form id="contact-form" aria-label="Contact form">
+              <div class="form-message" id="form-message" role="alert" aria-live="polite"></div>
+              
+              <div class="form-group">
+                <label for="name" class="form-label">Name <span aria-label="required">*</span></label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required aria-required="true" />
+              </div>
+
+              <div class="form-group">
+                <label for="company" class="form-label">Company <span aria-label="required">*</span></label>
+                <input type="text" id="company" name="company" class="form-input" placeholder="Company Name Inc" required aria-required="true" />
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email <span aria-label="required">*</span></label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="john@company.com" required aria-required="true" />
+              </div>
+
+              <div class="form-group">
+                <label for="role" class="form-label">Role</label>
+                <input type="text" id="role" name="role" class="form-input" placeholder="CTO, CISO, Compliance Manager..." />
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="form-label">Message <span aria-label="required">*</span></label>
+                <textarea id="message" name="message" class="form-textarea" placeholder="Tell us briefly what you need help with..." required aria-required="true"></textarea>
+              </div>
+
+              <div class="form-group">
+                <div class="form-checkbox-group">
+                  <input type="checkbox" id="can-share" name="can-share" class="form-checkbox" />
+                  <label for="can-share" class="form-checkbox-label">I can share documents/logs for a better estimate</label>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Edge Factory</h3>
+          <p>Deterministic AI governance for enterprises that demand control.</p>
+          <p style="margin-top: 1rem; font-size: 0.875rem;">Org.nr: [TBD]</p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <a href="mailto:ole@edgefactory.no">ole@edgefactory.no</a>
+          <a href="tel:+4797562612">+47 975 62 612</a>
+        </div>
+        <div class="footer-section">
+          <h3>Privacy</h3>
+          <p>We process your data in accordance with GDPR. No data is shared with third parties.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Edge Factory. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Language detection and localStorage
+    (function() {
+      const savedLang = localStorage.getItem('edgefactory-lang');
+      
+      // Set language to English
+      localStorage.setItem('edgefactory-lang', 'en');
+    })();
+
+    // Form handling
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target);
+      const data = {
+        name: formData.get('name'),
+        company: formData.get('company'),
+        email: formData.get('email'),
+        role: formData.get('role') || 'Not specified',
+        message: formData.get('message'),
+        canShare: formData.get('can-share') ? 'Yes' : 'No'
+      };
+
+      // Create mailto link as fallback
+      const subject = encodeURIComponent('Inquiry from edgefactory.no');
+      const body = encodeURIComponent(
+        `Name: ${data.name}\n` +
+        `Company: ${data.company}\n` +
+        `Email: ${data.email}\n` +
+        `Role: ${data.role}\n` +
+        `Can share documents: ${data.canShare}\n\n` +
+        `Message:\n${data.message}`
+      );
+      
+      // Use mailto as the submission method
+      window.location.href = `mailto:ole@edgefactory.no?subject=${subject}&body=${body}`;
+      
+      // Show success message
+      const messageEl = document.getElementById('form-message');
+      messageEl.textContent = 'Your email client has been opened. If it didn\'t open, please email ole@edgefactory.no directly.';
+      messageEl.className = 'form-message success show';
+      
+      // Reset form
+      e.target.reset();
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
