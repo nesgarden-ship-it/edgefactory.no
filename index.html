@@ -23,9 +23,8 @@
       color: var(--text-main);
       background-color: var(--bg-color);
       padding: 2rem 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      max-width: 720px;
+      margin: 0 auto;
       min-height: 100vh;
     }
 
@@ -98,12 +97,14 @@
 
     h2 {
       font-size: 1.4rem;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
       color: var(--primary-color);
     }
 
     p { margin-bottom: 1.2rem; font-size: 1.05rem; }
+
+    section { margin-top: 3rem; }
 
     ul {
       margin-bottom: 1.5rem;
@@ -116,7 +117,7 @@
     .context-box {
       background-color: #1e2023;
       border-left: 4px solid var(--accent-color);
-      padding: 1.5rem;
+      padding: 1.5rem 2rem;
       margin: 2.5rem 0;
       border-radius: 4px;
     }
@@ -178,37 +179,48 @@
       </div>
     </header>
 
+    <!-- WHO: Who is Edge Factory -->
     <section>
-      <p><strong>Jeg heter Ole Petter Valderhaug,</strong> og jeg jobber i skjæringspunktet mellom systemarkitektur, AI og operasjonell kontroll.</p>
-      <p>Jeg bygger systemer som gjør komplekse beslutninger sporbare, forklarbare og gjenopprettbare — også når AI inngår i prosessen.</p>
-      <p>Edge Factory er mitt initiativ for å løse det største problemet jeg ser i markedet akkurat nå: Gapet mellom AI i teori og AI i drift.</p>
+      <p>Edge Factory hjelper virksomheter med å forstå, styre og dokumentere komplekse digitale beslutningsprosesser. Vi bygger strukturer som gjør teknologi etterprøvbar, forklarbar og operasjonelt trygg – selv når systemene er store, sammensatte eller historisk uoversiktlige.</p>
     </section>
 
+    <!-- WHAT: What Edge Factory does (deterministic AI governance, traceability, decision history, control) -->
     <section>
-      <h2>Hva jeg utforsker</h2>
-      <p>Mange virksomheter kvier seg for å sette AI i produksjon fordi de mangler kontroll. Jeg gjør dette fordi jeg ser hvor fort kritisk logikk forsvinner når AI tas i bruk uten riktig rammeverk.</p>
-      <p>Min hypotese er at problemet ikke er modellene – men hvordan vi styrer og rammer dem inn. Jeg jobber med arkitektur som kombinerer:</p>
+      <h2>Hva vi gjør</h2>
+      <p>Vi arbeider med deterministiske rammeverk for styring av AI, automatisering og kritiske beslutningskjeder.</p>
+      <p>Fokuset er ikke på verktøy, men på kontroll:</p>
       <ul>
-        <li><strong>Deterministisk logikk:</strong> Regler som gir forutsigbarhet, repeterbarhet og kontroll.</li>
-        <li><strong>AI som verktøy:</strong> Kun for tolkning, aldri som ukritisk sannhetskilde.</li>
-        <li><strong>Full sporbarhet:</strong> Et etterprøvbart spor fra input → beslutning → output.</li>
+        <li>sporbar logikk</li>
+        <li>tydelig beslutningshistorikk</li>
+        <li>konsistente prosesser</li>
+        <li>dokumenterbare endringer</li>
       </ul>
+      <p>Dette gir virksomheter et grunnlag for å ta i bruk avansert teknologi uten å miste oversikt, ansvarlighet eller operasjonell stabilitet.</p>
     </section>
 
+    <!-- FOR WHOM: Who this is for -->
     <div class="context-box">
-      <h2>Hvis du har mottatt e-post fra meg</h2>
-      <p>Du er her sannsynligvis fordi jeg tok kontakt direkte.</p>
-      <p>Jeg er for tiden i en avklaringsfase. Jeg selger ikke et ferdig produkt, men søker dialog med ledere og fagfolk for å teste om hypotesene mine treffer reelle behov.</p>
-      <p>Jeg ber ikke om et prosjekt – bare en kort faglig avklaring for å forstå hvor skoen trykker hos dere.</p>
-      <p style="margin-bottom: 0;">Er det match, kan jeg foreslå en liten pilot eller en kort, skriftlig vurdering.</p>
+      <h2>Hvem dette er for</h2>
+      <p>Edge Factory passer for virksomheter som trenger klarhet i komplekse systemer – særlig der teknologi, risiko, drift og ledelse møtes.</p>
+      <p>Typiske roller vi jobber med: teknologiledere, arkitekter, risikostyring og compliance, operasjonelle beslutningstakere.</p>
     </div>
 
+    <!-- WHAT THIS IS NOT: Clear positioning -->
     <section>
-      <p style="margin-bottom: 0.8rem;">Om dette treffer: Svar gjerne med 1–2 setninger om hvor dere opplever størst friksjon mellom AI-initiativer og trygg drift.</p>
-      <p style="margin-bottom: 0.6rem;">
-        <a href="mailto:ole@edgefactory.no" class="action-link">ole@edgefactory.no</a>
+      <h2>Hva dette ikke er</h2>
+      <p>Edge Factory er ikke et konsulenthus, ikke et AI‑produkt og ikke en plattform.</p>
+      <p>Vi leverer ikke ferdige modeller eller generiske løsninger.</p>
+      <p>Vi hjelper virksomheter med å forstå og styre sine egne systemer – ikke erstatte dem.</p>
+    </section>
+
+    <!-- CONTACT: Dialogue and contact information -->
+    <section>
+      <p>Hvis du ønsker en faglig samtale om styring, sporbarhet eller operasjonell klarhet, er du velkommen til å ta kontakt.</p>
+      <p>Ingen salgspress. Ingen demoer. Bare en samtale.</p>
+      <p>
+        <a href="mailto:connect@edgefactory.no" class="action-link">connect@edgefactory.no</a>
       </p>
-      <p style="margin-bottom: 0;">
+      <p>
         <a class="action-link" href="tel:+4797562612">+47 975 62 612</a>
       </p>
     </section>
